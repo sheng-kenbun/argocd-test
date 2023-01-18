@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ubuntu
+  labels:
+    app: ubuntu
+  namespace: argocd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ubuntu
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: ubuntu
+    spec:
+      containers:
+        - name: ubuntu
+          image: ubuntu:latest
+          command: ["/bin/sleep", "3650d"]
+          # command: ["apt update && apt install python3 -y && python3 -m http.server 8000"]
+          imagePullPolicy: IfNotPresent
+          resources:
+            limits: 
+              cpu: "1"
+              memory: "128Mi"

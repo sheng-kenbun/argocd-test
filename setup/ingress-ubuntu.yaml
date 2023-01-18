@@ -1,19 +1,19 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd
+  name: ubuntu
   namespace: argocd
   annotations:
-    kubernetes.io/ingress.class: public
+    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
-  rules:
+  rules: 
     - http:
         paths:
-          - path: /argocd(/|$)(.*)
+          - path: /test(/|$)(.*)
             pathType: Prefix
             backend:
               service:
-                name: argo-cd-argocd-server
+                name: ubuntu-service
                 port:
-                  number: 443
+                  number: 8000

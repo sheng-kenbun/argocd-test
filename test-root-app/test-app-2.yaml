@@ -1,0 +1,20 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: test-app-2
+  namespace: argocd
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: test-app-ns
+  source:
+    path: test-root-app/test-app-2
+    repoURL: 'https://github.com/sheng-kenbun/argocd-test.git'
+    targetRevision: temp-github
+  project: project-1
+  syncPolicy:
+    automated:
+      allowEmpty: true
+      prune: true
+      selfHeal: true
